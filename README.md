@@ -172,12 +172,12 @@ This project is licensed under the MIT License - see the LICENSE file for detail
 ## Contact
 
 For questions and support:
-- Email: your.email@example.com
-- GitHub Issues: [Create an issue](https://github.com/yourusername/docurag/issues)
+- Email: beka.kakachia777@gmail.com
+- GitHub Issues: [Create an issue](https://github.com/Kakachia777/docurag/issues)
 
 ## Acknowledgments
 
 - Sentence Transformers team for the embedding model
-- OpenAI for GPT-3.5-turbo
+- OpenAI for GPT-4o
 - FastAPI team for the excellent web framework
 - ChromaDB team for the vector store implementation 
