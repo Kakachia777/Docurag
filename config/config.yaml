@@ -1,0 +1,146 @@
+app_name: "docurag"
+version: "1.0.0"
+
+# Embedding configuration
+embedding:
+  model: "sentence-transformers/all-mpnet-base-v2"
+  cache_dir: "models/embeddings"
+
+# Document chunking
+chunking:
+  size: 500
+  overlap: 50
+  separators: ["\n\n", "\n", " ", ""]
+
+# LLM configuration
+llm:
+  model: "gpt-4o"
+  temperature: 0.7
+  max_tokens: 500
+  system_prompt: |
+    You are a helpful technical documentation assistant. Your role is to:
+    1. Provide accurate and relevant information based on the documentation provided
+    2. Explain technical concepts clearly and concisely
+    3. Include relevant code examples when appropriate
+    4. Admit when you're not sure about something
+    5. Stick to the information in the provided documentation
+
+# Storage configuration
+storage:
+  cache_dir: "data/cache"
+  vector_store: "chroma"
+  index_path: "data/index"
+
+# Redis configuration
+redis:
+  host: "localhost"
+  port: 6379
+  ttl: 3600  # 1 hour cache TTL
+
+# API configuration
+api:
+  host: "0.0.0.0"
+  port: 8000
+  workers: 4
+  timeout: 30
+
+# Security configuration
+security:
+  api_keys:
+    - "your-api-key-1"
+    - "your-api-key-2"
+  rate_limit:
+    requests_per_minute: 60
+    burst: 10
+  cors:
+    allowed_origins:
+      - "http://localhost:3000"
+      - "https://your-domain.com"
+    allowed_methods:
+      - "GET"
+      - "POST"
+
+# Monitoring configuration
+monitoring:
+  prometheus_port: 9090
+  metrics:
+    - "query_latency"
+    - "token_usage"
+    - "cache_hits"
+    - "embedding_time"
+  alerts:
+    latency_threshold_ms: 1000
+    error_rate_threshold: 0.01
+
+# Logging configuration
+logging:
+  level: "INFO"
+  format: "json"
+  file: "logs/docurag.log"
+
+# Testing configuration
+testing:
+  test_data_path: "tests/data"
+  coverage_threshold: 80
+  performance:
+    max_latency_ms: 1000
+    min_throughput: 10
+
+# Documentation processing
+docs:
+  supported_formats:
+    - "markdown"
+    - "rst"
+    - "html"
+  preprocessing:
+    remove_html_tags: true
+    normalize_whitespace: true
+  metadata:
+    required_fields:
+      - "title"
+      - "source"
+      - "last_updated"
+    optional_fields:
+      - "author"
+      - "tags"
+      - "category"
+
+# Deployment configuration
+deployment:
+  kubernetes:
+    namespace: "docurag"
+    replicas: 3
+    resources:
+      requests:
+        cpu: "1"
+        memory: "2Gi"
+      limits:
+        cpu: "2"
+        memory: "4Gi"
+    health_check:
+      port: 8080
+      path: "/health"
+    readiness:
+      initial_delay_seconds: 30
+      period_seconds: 10
+    liveness:
+      initial_delay_seconds: 60
+      period_seconds: 15
+
+# Analytics configuration
+analytics:
+  tracking_enabled: true
+  metrics:
+    - name: "query_success_rate"
+      type: "gauge"
+      description: "Success rate of queries"
+    - name: "average_response_time"
+      type: "histogram"
+      description: "Average response time for queries"
+    - name: "document_count"
+      type: "counter"
+      description: "Number of indexed documents"
+  retention_days: 30
+  export:
+    format: "prometheus"
+    endpoint: "/metrics" 
